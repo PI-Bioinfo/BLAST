@@ -1,7 +1,7 @@
 # BLAST
 ## module 1: build reference: makeblastdb  
-* Download SwissProt sequence dataset
-* Generate a SwissProt NCBI Blast database  
+* Download sequence dataset
+* Generate a NCBI Blast database  
 ## module 2: pre-blasting
 * parse file csv: R1 only
 * calculate n (5% reads each file (3 files)) 
