@@ -8,7 +8,7 @@ params.ncbi_url = \
 // database name 
 params.dbname = "nt"
 
-// Downloading the SwissProt dataset
+// Downloading the dataset from NCBI
 process downloadNCBIdb {
     output:
         path "nt.fasta", emit: ncbi_nt
@@ -22,6 +22,7 @@ process downloadNCBIdb {
 
 // Build the database 
 process makeBlastDb {
+    container "ncbi/blast:latest"
     input: 
         path ncbi_nt
     output:
