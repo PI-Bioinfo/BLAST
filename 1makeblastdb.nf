@@ -1,6 +1,5 @@
 // Declare syntax version
 nextflow.enable.dsl = 2
-
 // get NCBI BLAST databases
 params.ncbi_url = \
 "https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/nt.gz"
@@ -14,8 +13,8 @@ process downloadNCBIdb {
         path "nt.fasta", emit: ncbi_nt
     script:
         """
-        wget ${params.ncbi_url} -O nt.fasta.gz
-        gzip -d nt.fasta.gz
+        wget $params.ncbi_url -O nt.fasta.gz
+        bzip -@ $task.cpus -d nt.fasta.gz
         """
 
 }
@@ -29,9 +28,13 @@ process makeBlastDb {
         path "ncbi_nt*", emit: nt_db
     script:
         """
-        sudo apt install ncbi-blast+
         makeblastdb -dbtype 'nucl'\
-        -in ${ncbi_nt} -out ${params.dbname} \
-        -input_type 'fasta' -blastdb_version 5 -parse_seqids
+            -in ${ncbi_nt} -out ${params.dbname} \
+            -input_type 'fasta' -blastdb_version 5 -parse_seqids
         """
+}
+
+workflow {
+downloadNCBIdb()
+makeBlastDb(downloadNCBIdb.out)
 }
