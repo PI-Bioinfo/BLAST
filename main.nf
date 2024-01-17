@@ -1,4 +1,6 @@
+#! /usr/bin/env nextflow
 nextflow.enable.dsl = 2
+
 // Work directory
 params.workdir = "$baseDir/work"
 params.outdir = "$baseDir/output"
@@ -6,7 +8,7 @@ params.db = null
 params.dbname = "nt"
 
 // Query sequences 
-params.csvDir = "$baseDir/dataset/design.csv"  
+params.csvDir = "$baseDir/testdata/design.csv"  
 
 // Load functions
 include { CREATEDB } from "$baseDir/modules/makeblastdb" 
