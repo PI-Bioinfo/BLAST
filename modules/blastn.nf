@@ -2,11 +2,11 @@ params.dbname = "nt"
 params.outfmt = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue staxids stitle sblastnames"
 
 // Performs a BLASTN sequence search and captures the 10 top species, sorting to e-value
-process blastsearch {
+process BLASTSEARCH {
     container "ncbi/blast:latest"
     publishDir "$baseDir/results", mode: 'copy'
     input: 
-        tuple val(sample), path(reads)
+        tuple val ( sample ), path( reads )
         path sub_query
         path nt_db
     output:

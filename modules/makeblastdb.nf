@@ -11,7 +11,7 @@ params.dbname = "nt"
 
 // Downloading the dataset from NCBI
 process downloadNCBIdb {
-    publishDir "${params.outdir}/nt_db", mode: 'copy'
+    publishDir "${ params.outdir }/nt_db", mode: 'copy'
     output:
         path "nt.fasta", emit: ncbi_nt
     script:
@@ -25,7 +25,7 @@ process downloadNCBIdb {
 // Build the database 
 process makeBlastDb {
     container "ncbi/blast:latest"
-    publishDir "${params.outdir}/nt_db", mode: 'copy'
+    publishDir "${ params.outdir }/nt_db", mode: 'copy'
     input: 
         path ncbi_nt
     output:
