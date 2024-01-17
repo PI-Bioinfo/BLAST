@@ -37,7 +37,7 @@ workflow {
     }
     
     // CREATEDB.out.view()
-    BLASTSEARCH( reads_ch,sub_query,CREATEDB.out ) 
+    BLASTSEARCH( reads_ch,sub_query,db ) 
     BLASTSEARCH.out.view()
 }
 
