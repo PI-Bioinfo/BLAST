@@ -28,7 +28,7 @@ process BLASTSEARCH {
         X="$list_outfmt"
         Y=\$(echo \$X | sed 's/[][]//g' | sed 's/, / /g')
         
-        blastn -db $params.dbname -query $sub_query -outfmt "\$Y" > blast_result
+        blastn -db $params.db -query $sub_query -outfmt "\$Y" > blast_result
         cat blast_result | sort -k11,11g | head -n $params.num_hits | cut -f 13 > ${ sample }_top_species.txt
         """
 }  

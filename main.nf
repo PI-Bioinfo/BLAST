@@ -20,7 +20,8 @@ include { BLASTSEARCH } from "$baseDir/modules/blastn"
 workflow {
     reads_ch = Channel.fromPath(params.csvDir)
             .splitCsv(header:true)
-            .map{ row-> tuple("$row.sample"), file("$row.read_1")}
+            .map{ PARSE_DESIGN(it) }
+            .view()
     
     numsample = CALCULATEREADS( reads_ch ) 
    
@@ -41,3 +42,13 @@ workflow {
     BLASTSEARCH.out.view()
 }
 
+
+def PARSE_DESIGN(LinkedHashMap row) {
+     reads = row.read_1 ?: row.read_2 ?: null
+
+     if (reads == null) {
+          error('Need to provide at least one read path')
+     }
+
+     return tuple(row.sample,file(reads))
+}
