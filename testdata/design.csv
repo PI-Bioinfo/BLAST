@@ -1,0 +1,4 @@
+sample,read_1,read_2
+s_1,testdata/s_1.fastq.gz
+s_2,testdata/s_2.fastq.gz
+s_3,testdata/s_3.fastq.gz

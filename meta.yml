@@ -1,0 +1,36 @@
+name: PI-Bioinfo_blastn
+description: Runs BLAST search in a genomic database
+keywords:
+  - fasta
+  - blast
+  - blastn
+  - DNA sequence
+tools:
+  - blast:
+      description: |
+        BLAST finds regions of similarity between biological sequences.
+      homepage: https://blast.ncbi.nlm.nih.gov/Blast.cgi
+      documentation: https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=Blastdocs
+      doi: 10.1016/S0022-2836(05)80360-2
+      licence: ["US-Government-Work"]
+input:
+  - sample:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - reads:
+      type: file
+      description: Input fastq file containing queries sequences
+      pattern: "*.{fq,fastq,fq.gz,fastq.gz}"
+output:
+  - dbname:
+      type: file
+      description: Prefix of folder containing the blast database
+      pattern: "*"
+  - txt:
+      type: file
+      description: File containing blastn hits
+      pattern: "*_top_species.txt"
+authors and maintainers:
+  - "Team PI-Bioinfo"
